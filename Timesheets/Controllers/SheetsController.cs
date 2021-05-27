@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Timesheets.Domain.Interfaces;
 using Timesheets.Models;
@@ -7,9 +8,8 @@ using Timesheets.Models.Dto;
 
 namespace Timesheets.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class SheetsController: ControllerBase
+    [Authorize]
+    public class SheetsController: TimesheetsBaseController
     {
         private readonly ISheetManager _sheetManager;
         private readonly IContractManager _contractManager;
@@ -27,7 +27,8 @@ namespace Timesheets.Controllers
             
             return Ok(result);
         }
-        
+
+        [Authorize(Roles = "user")]
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {

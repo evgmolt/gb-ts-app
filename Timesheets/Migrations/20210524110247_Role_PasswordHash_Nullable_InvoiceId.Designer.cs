@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Timesheets.Data.Ef;
@@ -9,9 +10,10 @@ using Timesheets.Data.Ef;
 namespace Timesheets.Migrations
 {
     [DbContext(typeof(TimesheetDbContext))]
-    partial class TimesheetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210524110247_Role_PasswordHash_Nullable_InvoiceId")]
+    partial class Role_PasswordHash_Nullable_InvoiceId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,23 +104,6 @@ namespace Timesheets.Migrations
                     b.HasIndex("ContractId");
 
                     b.ToTable("invoices");
-                });
-
-            modelBuilder.Entity("Timesheets.Models.RefreshTokenWrapper", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("refreshtokenwrappers");
                 });
 
             modelBuilder.Entity("Timesheets.Models.Service", b =>
